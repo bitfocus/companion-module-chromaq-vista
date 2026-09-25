@@ -1,0 +1,28 @@
+{
+	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
+	"type": "connection",
+	"id": "companion-module-chromaq-vista",
+	"name": "companion-module-chromaq-vista",
+	"shortname": "chromaq-vista",
+	"description": "Controls Chroma-Q's Vista 3 lighting software over OSC",
+	"version": "0.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
+	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
+	"maintainers": [
+		{
+			"name": "Zachary Klosko",
+			"email": "zklosko@hopecentral.com"
+		}
+	],
+	"runtime": {
+		"type": "node22",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../dist/main.js"
+	},
+	"legacyIds": [],
+	"manufacturer": "Chorma-Q",
+	"products": ["Vista 3"],
+	"keywords": ["lighing", "osc"]
+}
