@@ -734,6 +734,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"companion-module-chromaq-vista@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "companion-module-chromaq-vista@workspace:."
+  dependencies:
+    "@companion-module/base": "npm:2.0.4"
+    "@companion-module/tools": "npm:^3.0.1"
+    "@types/node": "npm:^22.19.17"
+    eslint: "npm:^9.39.4"
+    husky: "npm:^9.1.7"
+    lint-staged: "npm:^16.4.0"
+    node-osc: "npm:^11.7.1"
+    prettier: "npm:^3.8.3"
+    rimraf: "npm:^6.1.3"
+    typescript: "npm:~6.0.3"
+    typescript-eslint: "npm:^8.59.0"
+  languageName: unknown
+  linkType: soft
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -1511,6 +1529,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-osc@npm:^11.7.1":
+  version: 11.7.1
+  resolution: "node-osc@npm:11.7.1"
+  checksum: 10c0/bade805ee9490085fb902ef8b1f75d91622d5bff97aca713e2739c6ccd85b677c8a74bfe9b92e4a9781ec9b4d0fefc29ed76f702c5722b99318b4202375842a0
+  languageName: node
+  linkType: hard
+
 "onetime@npm:^7.0.0":
   version: 7.0.0
   resolution: "onetime@npm:7.0.0"
@@ -2008,23 +2033,6 @@ __metadata:
   checksum: 10c0/36d4793e9cf7060f9da543baf67c55e354f4862c8d3d34de1a1b1d7c382d44171315cc54abf84d8900b8113d742b830108a1434f4898fb244f9b7e8426d4b8f5
   languageName: node
   linkType: hard
-
-"your-module-name@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "your-module-name@workspace:."
-  dependencies:
-    "@companion-module/base": "npm:2.0.4"
-    "@companion-module/tools": "npm:^3.0.1"
-    "@types/node": "npm:^22.19.17"
-    eslint: "npm:^9.39.4"
-    husky: "npm:^9.1.7"
-    lint-staged: "npm:^16.4.0"
-    prettier: "npm:^3.8.3"
-    rimraf: "npm:^6.1.3"
-    typescript: "npm:~6.0.3"
-    typescript-eslint: "npm:^8.59.0"
-  languageName: unknown
-  linkType: soft
 
 "zx@npm:^8.8.5":
   version: 8.8.5

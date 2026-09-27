@@ -7,8 +7,8 @@
 	"description": "Controls Chroma-Q's Vista 3 lighting software over OSC",
 	"version": "0.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
-	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
+	"repository": "git+https://github.com/bitfocus/companion-module-chromaq-vista.git",
+	"bugs": "https://github.com/bitfocus/companion-module-chromaq-vista/issues",
 	"maintainers": [
 		{
 			"name": "Zachary Klosko",
@@ -22,7 +22,7 @@
 		"entrypoint": "../dist/main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "Chorma-Q",
+	"manufacturer": "Chroma-Q",
 	"products": ["Vista 3"],
 	"keywords": ["lighing", "osc"]
 }

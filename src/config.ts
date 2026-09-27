@@ -3,6 +3,7 @@ import { Regex, type SomeCompanionConfigField } from '@companion-module/base'
 export type ModuleConfig = {
 	host: string
 	port: number
+	verbose: boolean
 }
 
 export function GetConfigFields(): SomeCompanionConfigField[] {
@@ -22,6 +23,13 @@ export function GetConfigFields(): SomeCompanionConfigField[] {
 			min: 1,
 			max: 65535,
 			default: 8000,
+		},
+		{
+			type: 'checkbox',
+			id: 'verbose',
+			label: 'Enable verbose logging',
+			default: false,
+			width: 4,
 		},
 	]
 }

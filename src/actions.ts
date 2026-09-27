@@ -3,7 +3,7 @@ import type ModuleInstance from './main.js'
 export type ActionsSchema = {
 	sample_action: {
 		options: {
-			num: number
+			address: string
 		}
 	}
 }
@@ -11,19 +11,21 @@ export type ActionsSchema = {
 export function UpdateActions(self: ModuleInstance): void {
 	self.setActionDefinitions({
 		sample_action: {
-			name: 'My First Action',
+			name: 'Send custom message without args',
 			options: [
 				{
-					id: 'num',
-					type: 'number',
-					label: 'Test',
-					default: 5,
-					min: 0,
-					max: 100,
+					id: 'address',
+					type: 'textinput',
+					label: 'OSC Address',
+					default: '',
 				},
 			],
 			callback: async (event) => {
-				console.log('Hello world!', event.options.num)
+				if (!self.VistaClient) {
+					console.log('Module did not initialize client properly')
+					return
+				}
+				await self.VistaClient.send(event.options.address, '')
 			},
 		},
 	})
