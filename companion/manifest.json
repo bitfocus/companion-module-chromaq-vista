@@ -1,8 +1,8 @@
 {
 	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
 	"type": "connection",
-	"id": "companion-module-chromaq-vista",
-	"name": "companion-module-chromaq-vista",
+	"id": "chromaq-vista",
+	"name": "chromaq-vista",
 	"shortname": "chromaq-vista",
 	"description": "Controls Chroma-Q's Vista 3 lighting software over OSC",
 	"version": "0.0.0",
