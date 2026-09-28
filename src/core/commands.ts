@@ -90,10 +90,22 @@ export const COMMANDS: VistaCommands[] = [
 		osc: '/V3/console/EX/1/spbNext',
 		args: ['true'],
 	},
+	{
+		id: 'spbSkipToStart',
+		name: 'Console: Skip to start',
+		osc: '/V3/console/EX/1/spbSkipToStart',
+		args: ['true'],
+	},
+	{
+		id: 'spbSkipToEnd',
+		name: 'Console: Skip to end',
+		osc: '/V3/console/EX/1/spbSkipToEnd',
+		args: ['true'],
+	},
 	// Global
 	{
 		id: 'softkey',
-		name: 'Trigger Softkey',
+		name: 'Softkey: Trigger Softkey',
 		osc: '/V3/global/softkey/number/${softkey}',
 		options: [
 			{
@@ -132,24 +144,49 @@ export const COMMANDS: VistaCommands[] = [
 		osc: '/V3/global/lampOnMacro',
 	},
 	{
+		id: 'reset',
+		name: 'Macro: Reset',
+		osc: '/V3/global/resetMacro',
+	},
+	{
 		id: 'solo',
 		name: 'Toggle Solo',
 		osc: '/V3/global/solo',
 	},
 	{
 		id: 'stealth',
-		name: 'Toggle Stealth',
+		name: 'Programmer: Toggle Stealth',
 		osc: '/V3/global/stealth',
 		args: ['true'],
 	},
 	{
 		id: 'quickUpdate',
-		name: 'Quick Update',
+		name: 'Programmer: Quick Update',
 		osc: '/V3/global/quickUpdate',
 	},
 	{
+		id: 'update',
+		name: 'Programmer: Update',
+		osc: '/V3/global/update',
+	},
+	{
+		id: 'clearAllFeatures',
+		name: 'Clear: All features',
+		osc: '/V3/global/clearAllFeatures',
+	},
+	{
+		id: 'clearClose',
+		name: 'Clear: Clear/Close',
+		osc: '/V3/global/clearClose',
+	},
+	{
+		id: 'closeClip',
+		name: 'Cuelist: Close Cuelist',
+		osc: '/V3/global/closeClip',
+	},
+	{
 		id: 'clearProgrammer',
-		name: 'Clear: Programmer',
+		name: 'Clear: Clear programmer',
 		osc: '/V3/global/clearProgrammer',
 	},
 	{
