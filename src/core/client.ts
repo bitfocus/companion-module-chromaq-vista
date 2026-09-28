@@ -72,7 +72,7 @@ export class VistaClient extends EventEmitter {
 			if (this.#verbose) {
 				clientLogger.info(`Sending OSC: ${address} -- ${args}`)
 			}
-			if (this.#verbose && err) {
+			if (err) {
 				clientLogger.error(`Error sending message: address - ${address}, args - ${args}, error - ${err}`)
 			}
 		})
