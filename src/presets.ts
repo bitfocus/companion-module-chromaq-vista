@@ -5,32 +5,65 @@ import type { CompanionPresetDefinitions, CompanionPresetSection } from '@compan
 export function UpdatePresets(self: ModuleInstance): void {
 	const structure: CompanionPresetSection[] = [
 		{
-			id: 'section1',
-			name: 'Section One',
+			id: 'console',
+			name: 'Console',
 			definitions: [
 				{
-					id: 'group1',
-					name: 'Group One',
-					description: 'A starting point for preset definitions!',
+					id: 'pbKeys',
+					name: 'Playback Keys',
+					description: 'Control default cuelist playback',
 					type: 'simple',
-					presets: ['mylabel'],
+					presets: ['spbPlay', 'spbPause'],
 				},
 			],
 		},
 	]
 
 	const presets: CompanionPresetDefinitions<ModuleSchema> = {}
-	presets['mylabel'] = {
+	presets['spbPlay'] = {
 		type: 'simple',
-		name: 'Name',
+		name: 'Play',
 		style: {
-			text: 'My first Preset button',
+			text: 'Play',
 			size: 'auto',
 			color: 0xffffff,
 			bgcolor: 0x000000,
 			show_topbar: false,
 		},
-		steps: [],
+		steps: [
+			{
+				down: [
+					{
+						actionId: 'spbPlay',
+						options: {},
+					},
+				],
+				up: [],
+			},
+		],
+		feedbacks: [],
+	}
+	presets['spbPause'] = {
+		type: 'simple',
+		name: 'Pause/Back',
+		style: {
+			text: 'Pause/Back',
+			size: 'auto',
+			color: 0xffffff,
+			bgcolor: 0x000000,
+			show_topbar: false,
+		},
+		steps: [
+			{
+				down: [
+					{
+						actionId: 'spbPauseBack',
+						options: {},
+					},
+				],
+				up: [],
+			},
+		],
 		feedbacks: [],
 	}
 

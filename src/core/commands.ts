@@ -155,7 +155,7 @@ export const COMMANDS: VistaCommands[] = [
 	},
 	{
 		id: 'stealth',
-		name: 'Programmer: Toggle Stealth',
+		name: 'Toggle Stealth',
 		osc: '/V3/global/stealth',
 		args: ['true'],
 	},

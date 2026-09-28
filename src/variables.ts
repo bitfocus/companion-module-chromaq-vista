@@ -1,7 +1,7 @@
 import type { CompanionVariableDefinitions } from '@companion-module/base'
 import type ModuleInstance from './main.js'
 
-// export type VariablesSchema = null
+export type VariablesSchema = any
 
 export function UpdateVariableDefinitions(self: ModuleInstance): void {
 	const variables: CompanionVariableDefinitions = {}
