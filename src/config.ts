@@ -2,7 +2,8 @@ import { Regex, type SomeCompanionConfigField } from '@companion-module/base'
 
 export type ModuleConfig = {
 	host: string
-	port: number
+	sendPort: number
+	listenPort: number
 	verbose: boolean
 }
 
@@ -17,12 +18,21 @@ export function GetConfigFields(): SomeCompanionConfigField[] {
 		},
 		{
 			type: 'number',
-			id: 'port',
+			id: 'sendPort',
 			label: 'Target Port',
 			width: 4,
 			min: 1,
 			max: 65535,
 			default: 8000,
+		},
+		{
+			type: 'number',
+			id: 'listenPort',
+			label: 'Listen Port',
+			width: 4,
+			min: 1,
+			max: 65535,
+			default: 9000,
 		},
 		{
 			type: 'checkbox',

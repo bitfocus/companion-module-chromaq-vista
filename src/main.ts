@@ -52,6 +52,7 @@ export default class ModuleInstance extends InstanceBase<ModuleSchema> {
 	// When module gets deleted
 	async destroy(): Promise<void> {
 		this.log('debug', 'destroy')
+		if (this.VistaClient) await this.VistaClient.destroy()
 	}
 
 	async configUpdated(config: ModuleConfig): Promise<void> {
