@@ -50,7 +50,7 @@ export function UpdateActions(self: ModuleInstance): void {
 	for (const c of COMMANDS) {
 		actions[c.id] = {
 			name: c.name,
-
+			description: c.description,
 			options: c.options ?? [],
 
 			callback: async (event) => {
@@ -68,6 +68,16 @@ export function UpdateActions(self: ModuleInstance): void {
 				}
 
 				await self.VistaClient.send(address, args)
+
+				if (c.requiresButtonUnpress) {
+					setTimeout(() => {
+						if (!self.VistaClient) {
+							console.log('Module did not initialize client properly')
+							return
+						}
+						void self.VistaClient.send(address, ['false'])
+					}, 20)
+				}
 			},
 		}
 	}

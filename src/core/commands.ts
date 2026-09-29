@@ -7,6 +7,7 @@ export interface VistaCommands {
 	description?: string
 	args?: string[] | ((options: Record<string, unknown>) => string[])
 	options?: SomeCompanionActionInputField<string>[]
+	requiresButtonUnpress?: boolean
 }
 
 export const COMMANDS: VistaCommands[] = [
@@ -67,45 +68,134 @@ export const COMMANDS: VistaCommands[] = [
 		},
 	},
 	{
+		id: 'playbackButton',
+		name: 'Console: Playback button',
+		osc: '/V3/console/EX/1/playbackButton/panel/${panel}/bank/${bank}/row/${row}/col/${col}',
+		description:
+			'Trigger a console playback button. WARNING: sending an out-of-range request has been known to crash Vista.',
+		options: [
+			{
+				id: 'panel',
+				type: 'number',
+				label: 'panel',
+				min: 0,
+				max: 10,
+				default: 0,
+			},
+			{
+				id: 'bank',
+				type: 'number',
+				label: 'bank',
+				min: 0,
+				max: 100,
+				default: 0,
+			},
+			{
+				id: 'row',
+				type: 'number',
+				label: 'Row',
+				min: 0,
+				max: 11,
+				default: 0,
+			},
+			{
+				id: 'col',
+				type: 'number',
+				label: 'Column',
+				min: 0,
+				max: 59,
+				default: 0,
+			},
+		],
+		args: ['true'],
+		requiresButtonUnpress: true,
+	},
+	{
+		id: 'playbackFader',
+		name: 'Console: Playback fader',
+		osc: '/V3/console/EX/1/playbackFader/panel/${panel}/col/${col}',
+		description:
+			'Adjusts the level of a console playback fader. WARNING: sending an out-of-range request has been known to crash Vista.',
+		options: [
+			{
+				id: 'level',
+				type: 'number',
+				label: 'Fader position',
+				min: 0,
+				max: 100,
+				default: 100,
+			},
+			{
+				id: 'panel',
+				type: 'number',
+				label: 'panel',
+				min: 0,
+				max: 10,
+				default: 0,
+			},
+			{
+				id: 'col',
+				type: 'number',
+				label: 'Column',
+				min: 0,
+				max: 100,
+				default: 0,
+			},
+		],
+		args: (options: Record<string, unknown>): string[] => {
+			const level = Number(options.level)
+
+			if (Number.isNaN(level)) throw new Error(`Invalid level: ${options.level}`)
+
+			return [(level / 100).toString()]
+		},
+	},
+	{
 		id: 'spbPlay',
 		name: 'Console: Play',
 		osc: '/V3/console/EX/1/spbPlay',
 		args: ['true'],
+		requiresButtonUnpress: true,
 	},
 	{
 		id: 'spbPauseBack',
 		name: 'Console: Pause/Back',
 		osc: '/V3/console/EX/1/spbPauseBack',
 		args: ['true'],
+		requiresButtonUnpress: true,
 	},
 	{
 		id: 'spbPrev',
-		name: 'Console: Previous cue',
-		osc: '/V3/console/EX/1/spbPrev',
+		name: 'Console: Skip backward',
+		osc: '/V3/console/EX/1/spbSkipBack',
 		args: ['true'],
+		requiresButtonUnpress: true,
 	},
 	{
 		id: 'spbNext',
-		name: 'Console: Next cue',
-		osc: '/V3/console/EX/1/spbNext',
+		name: 'Console: Skip forward',
+		osc: '/V3/console/EX/1/spbSkipForward',
 		args: ['true'],
+		requiresButtonUnpress: true,
 	},
 	{
 		id: 'spbSkipToStart',
 		name: 'Console: Skip to start',
 		osc: '/V3/console/EX/1/spbSkipToStart',
 		args: ['true'],
+		requiresButtonUnpress: true,
 	},
 	{
 		id: 'spbSkipToEnd',
 		name: 'Console: Skip to end',
 		osc: '/V3/console/EX/1/spbSkipToEnd',
 		args: ['true'],
+		requiresButtonUnpress: true,
 	},
 	// Global
 	{
 		id: 'softkey',
-		name: 'Softkey: Trigger Softkey',
+		name: 'Softkey',
 		osc: '/V3/global/softkey/number/${softkey}',
 		options: [
 			{
@@ -113,7 +203,7 @@ export const COMMANDS: VistaCommands[] = [
 				type: 'number',
 				label: 'Softkey number',
 				min: 1,
-				max: 100,
+				max: 12,
 				default: 1,
 			},
 		],
@@ -152,12 +242,6 @@ export const COMMANDS: VistaCommands[] = [
 		id: 'solo',
 		name: 'Toggle Solo',
 		osc: '/V3/global/solo',
-	},
-	{
-		id: 'stealth',
-		name: 'Toggle Stealth',
-		osc: '/V3/global/stealth',
-		args: ['true'],
 	},
 	{
 		id: 'quickUpdate',
