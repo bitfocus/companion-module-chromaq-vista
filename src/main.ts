@@ -57,7 +57,7 @@ export default class ModuleInstance extends InstanceBase<ModuleSchema> {
 
 	async configUpdated(config: ModuleConfig): Promise<void> {
 		this.config = config
-		await this.VistaClient?.updateConifg(config)
+		if (this.VistaClient) await this.VistaClient.updateConifg(config)
 	}
 
 	// Return config fields for web config
