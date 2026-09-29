@@ -34,6 +34,10 @@ export class VistaClient extends EventEmitter {
 			this.#receiveMessage(msg)
 		})
 
+		this.#server.on('error', (error) => {
+			this.emit('status', { status: 'connection_failure', msg: error })
+		})
+
 		this.#client = new Client(this.host, this.sendPort)
 	}
 
