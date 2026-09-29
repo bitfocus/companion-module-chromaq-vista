@@ -11,9 +11,9 @@ export function UpdatePresets(self: ModuleInstance): void {
 				{
 					id: 'pbKeys',
 					name: 'Playback Keys',
-					description: 'Control default cuelist playback',
+					description: 'Controls default cuelist playback',
 					type: 'simple',
-					presets: ['spbPlay', 'spbPause'],
+					presets: ['spbPlay', 'spbPause', 'spbPrev', 'spbNext', 'spbSkipToStart', 'spbSkipToEnd'],
 				},
 			],
 		},
@@ -24,8 +24,8 @@ export function UpdatePresets(self: ModuleInstance): void {
 		type: 'simple',
 		name: 'Play',
 		style: {
-			text: 'Play',
-			size: 'auto',
+			text: '▶ Play',
+			size: '24',
 			color: 0xffffff,
 			bgcolor: 0x000000,
 			show_topbar: false,
@@ -47,8 +47,8 @@ export function UpdatePresets(self: ModuleInstance): void {
 		type: 'simple',
 		name: 'Pause/Back',
 		style: {
-			text: 'Pause/Back',
-			size: 'auto',
+			text: '⏸ Pause',
+			size: '24',
 			color: 0xffffff,
 			bgcolor: 0x000000,
 			show_topbar: false,
@@ -58,6 +58,98 @@ export function UpdatePresets(self: ModuleInstance): void {
 				down: [
 					{
 						actionId: 'spbPauseBack',
+						options: {},
+					},
+				],
+				up: [],
+			},
+		],
+		feedbacks: [],
+	}
+	presets['spbPrev'] = {
+		type: 'simple',
+		name: 'Previous',
+		style: {
+			text: '⏮ Prev',
+			size: '24',
+			color: 0xffffff,
+			bgcolor: 0x000000,
+			show_topbar: false,
+		},
+		steps: [
+			{
+				down: [
+					{
+						actionId: 'spbPrev',
+						options: {},
+					},
+				],
+				up: [],
+			},
+		],
+		feedbacks: [],
+	}
+	presets['spbNext'] = {
+		type: 'simple',
+		name: 'Next',
+		style: {
+			text: '⏭ Next',
+			size: '24',
+			color: 0xffffff,
+			bgcolor: 0x000000,
+			show_topbar: false,
+		},
+		steps: [
+			{
+				down: [
+					{
+						actionId: 'spbNext',
+						options: {},
+					},
+				],
+				up: [],
+			},
+		],
+		feedbacks: [],
+	}
+	presets['spbSkipToStart'] = {
+		type: 'simple',
+		name: 'Skip to beginning',
+		style: {
+			text: '⏮\nStart',
+			size: '18',
+			color: 0xffffff,
+			bgcolor: 0x000000,
+			show_topbar: false,
+		},
+		steps: [
+			{
+				down: [
+					{
+						actionId: 'spbSkipToStart',
+						options: {},
+					},
+				],
+				up: [],
+			},
+		],
+		feedbacks: [],
+	}
+	presets['spbSkipToEnd'] = {
+		type: 'simple',
+		name: 'Skip to end',
+		style: {
+			text: '⏭\nEnd',
+			size: '18',
+			color: 0xffffff,
+			bgcolor: 0x000000,
+			show_topbar: false,
+		},
+		steps: [
+			{
+				down: [
+					{
+						actionId: 'spbSkipToEnd',
 						options: {},
 					},
 				],
