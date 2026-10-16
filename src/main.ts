@@ -15,9 +15,10 @@ export type ModuleSchema = {
 	variables: VariablesSchema
 }
 
-const statusMap: Record<string, InstanceStatus> = {
+export const statusMap: Record<string, InstanceStatus> = {
 	connecting: InstanceStatus.Connecting,
 	ok: InstanceStatus.Ok,
+	disconnected: InstanceStatus.Disconnected,
 	bad_config: InstanceStatus.BadConfig,
 	connection_failure: InstanceStatus.ConnectionFailure,
 }
@@ -35,19 +36,18 @@ export default class ModuleInstance extends InstanceBase<ModuleSchema> {
 	async init(config: ModuleConfig): Promise<void> {
 		this.config = config
 
-		this.updateStatus(InstanceStatus.Ok)
-
 		this.updateActions() // export actions
 		this.updateFeedbacks() // export feedbacks
 		this.updatePresets() // export Presets
 		this.updateVariableDefinitions() // export variable definitions
 
-		this.VistaClient = new VistaClient(config)
-		this.VistaClient.connect()
+		this.VistaClient = new VistaClient()
 
 		this.VistaClient.on('status', (status) => {
 			this.updateStatus(statusMap[status.status], status.msg)
 		})
+
+		await this.VistaClient.connect(this.config)
 	}
 	// When module gets deleted
 	async destroy(): Promise<void> {
@@ -57,7 +57,7 @@ export default class ModuleInstance extends InstanceBase<ModuleSchema> {
 
 	async configUpdated(config: ModuleConfig): Promise<void> {
 		this.config = config
-		if (this.VistaClient) await this.VistaClient.updateConifg(config)
+		if (this.VistaClient) await this.VistaClient.connect(config)
 	}
 
 	// Return config fields for web config

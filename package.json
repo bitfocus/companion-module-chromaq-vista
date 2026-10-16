@@ -1,6 +1,6 @@
 {
 	"name": "companion-module-chromaq-vista",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "dist/main.js",
 	"type": "module",
 	"scripts": {
@@ -16,7 +16,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/bitfocus/companion-module-your-module-name.git"
+		"url": "git+https://github.com/bitfocus/companion-module-chromaq-vista.git"
 	},
 	"engines": {
 		"node": "^22.20",
