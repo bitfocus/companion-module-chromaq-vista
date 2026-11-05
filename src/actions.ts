@@ -1,5 +1,6 @@
 import type { CompanionActionDefinitions } from '@companion-module/base'
 import { createModuleLogger } from '@companion-module/base'
+import type { MscOptions } from './core/msc.js'
 import type ModuleInstance from './main.js'
 
 const actionsLogger = createModuleLogger('Actions')
@@ -7,6 +8,7 @@ const actionsLogger = createModuleLogger('Actions')
 type NoOptions = { options: Record<string, never> }
 
 export type ActionsSchema = {
+	msc: { options: MscOptions }
 	custom_message: {
 		options: {
 			address: string
@@ -70,6 +72,28 @@ export type ActionsSchema = {
 
 export function UpdateActions(self: ModuleInstance): void {
 	const actions: CompanionActionDefinitions<ActionsSchema> = {
+		msc: {
+			name: 'MSC: GO / STOP / RESUME',
+			description: 'Sends MIDI SysEx. Blank cue/list addresses open cuelists. A cuelist requires a cue.',
+			options: [
+				{
+					type: 'dropdown',
+					id: 'command',
+					label: 'Command',
+					default: 'go',
+					choices: [
+						{ id: 'go', label: 'GO' },
+						{ id: 'stop', label: 'STOP (pause)' },
+						{ id: 'resume', label: 'RESUME' },
+					],
+				},
+				{ type: 'textinput', id: 'cue', label: 'Cue number (blank for next/current transitions)', default: '' },
+				{ type: 'textinput', id: 'cuelist', label: 'Cuelist number (optional; requires cue)', default: '' },
+			],
+			callback: async (event) => {
+				self.sendMsc(event.options)
+			},
+		},
 		custom_message: {
 			name: 'Custom: Send message without arguments',
 			options: [

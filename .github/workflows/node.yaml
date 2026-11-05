@@ -43,6 +43,8 @@ jobs:
           yarn build
         env:
           CI: true
+      - name: Run MSC tests
+        run: node --test test/*.test.mjs
       - name: Run lint
         run: |
           yarn lint
