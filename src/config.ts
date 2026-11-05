@@ -5,6 +5,7 @@ export type ModuleConfig = {
 	sendPort: number
 	listenPort: number
 	verbose: boolean
+	variableMappings?: string
 }
 
 export function GetConfigFields(): SomeCompanionConfigField[] {
@@ -33,6 +34,14 @@ export function GetConfigFields(): SomeCompanionConfigField[] {
 			min: 1,
 			max: 65535,
 			default: 9000,
+		},
+		{
+			type: 'textinput',
+			id: 'variableMappings',
+			label: 'OSC variables (one per line: variable_id=/osc/address; add a space and argument number if needed)',
+			width: 12,
+			multiline: true,
+			default: '',
 		},
 		{
 			type: 'checkbox',

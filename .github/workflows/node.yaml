@@ -38,9 +38,9 @@ jobs:
           yarn install
         env:
           CI: true
-      - name: Build and check types
+      - name: Build, check types and run tests
         run: |
-          yarn build
+          yarn test
         env:
           CI: true
       - name: Run lint
