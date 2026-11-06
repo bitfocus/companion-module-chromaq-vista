@@ -55,7 +55,7 @@ test('MSC action dispatches separately and existing OSC actions remain available
 	]
 	assert.deepEqual(
 		Object.keys(actions)
-			.filter((key) => key !== 'msc')
+			.filter((key) => key !== 'msc' && !key.startsWith('msc_'))
 			.sort(),
 		expected.sort(),
 	)

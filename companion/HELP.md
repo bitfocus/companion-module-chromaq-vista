@@ -26,7 +26,7 @@ MSC output is optional and disabled by default. Existing OSC actions keep their 
 2. In Vista **File > User Preferences > MIDI**, select the receiving external MIDI port and set the MSC device ID. Enable MIDI Show Control in Vista. Menu wording can vary by Vista version.
 3. In this connection, enable MSC, choose the matching **MIDI output port**, and set the **device ID** in decimal. Save the connection. Save and reopen settings to refresh the port list after adding a port. Selection uses the exact port name, so port reordering will not silently redirect commands. Missing or duplicate names are rejected.
 4. Leave **command format** at **1 (Lighting / 0x01)**, the format documented for Vista. Other 7-bit values are an advanced override; Vista acceptance of those formats is not confirmed.
-5. Add **MSC: GO / STOP / RESUME** to a button and choose the command, cue, and optional cuelist.
+5. Add **MSC: GO**, **MSC: STOP / Pause**, or **MSC: RESUME** to a button. Each action includes command information and optional cue/cuelist fields.
 
 - **GO (0x01)** plays the numbered cue, or advances to the next cue when the cue and list fields are blank.
 - **STOP (0x02)** pauses running transitions. **RESUME (0x03)** continues stopped transitions. With no cue, they affect all applicable transitions; these are not release commands.
@@ -49,3 +49,9 @@ MSC is output only: an open MIDI port does not confirm that Vista received or ex
 - [MSC specification](https://www.richmondsounddesign.com/docs/midi-show-control-specification.pdf), command definitions: GO 01, STOP 02, RESUME 03 and cue/list requirements.
 
 Run `yarn test`, `yarn lint`, and `yarn package` to validate the implementation. Tests cover documented byte sequences, invalid inputs, and MIDI port lifecycle using a fake output. Before live use, test against your Vista version: route MIDI, match device IDs, GO a numbered cue/list, STOP a long fade, RESUME it, then check blank-address behavior with your open lists. Confirm existing OSC buttons still work with MSC enabled and disabled. Automated tests cannot establish actual Vista execution.
+
+## Individual MSC action cards
+
+Choose GO, STOP / Pause, or RESUME directly from the action picker. Each card explains its effect and provides optional cue and cuelist fields; there is no command dropdown. Blank fields are accepted. If a cuelist is supplied, a cue is required by this implementation.
+
+The **MSC: Legacy combined command** action retains the original `msc` ID and callback so existing buttons and expression-driven command choices continue to work. New buttons should use the individual actions.
