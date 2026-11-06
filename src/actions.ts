@@ -1,5 +1,6 @@
 import type { CompanionActionDefinitions } from '@companion-module/base'
 import { createModuleLogger } from '@companion-module/base'
+import type { MscOptions } from './core/msc.js'
 import type ModuleInstance from './main.js'
 
 const actionsLogger = createModuleLogger('Actions')
@@ -7,6 +8,10 @@ const actionsLogger = createModuleLogger('Actions')
 type NoOptions = { options: Record<string, never> }
 
 export type ActionsSchema = {
+	msc: { options: MscOptions }
+	msc_go: { options: { cue?: string; cuelist?: string; info?: string } }
+	msc_stop: { options: { cue?: string; cuelist?: string; info?: string } }
+	msc_resume: { options: { cue?: string; cuelist?: string; info?: string } }
 	custom_message: {
 		options: {
 			address: string
@@ -70,6 +75,115 @@ export type ActionsSchema = {
 
 export function UpdateActions(self: ModuleInstance): void {
 	const actions: CompanionActionDefinitions<ActionsSchema> = {
+		msc_go: {
+			name: 'MSC: GO',
+			description:
+				'Play a numbered cue using its programmed timing. Leave cue and cuelist blank to advance the open cuelists.',
+			options: [
+				{
+					type: 'static-text',
+					id: 'info',
+					label: 'About this command',
+					value:
+						'Play a numbered cue using its programmed timing. Leave cue and cuelist blank to advance the open cuelists.',
+				},
+				{ type: 'textinput', id: 'cue', label: 'Cue number (optional)', default: '', minLength: 0 },
+				{
+					type: 'textinput',
+					id: 'cuelist',
+					label: 'Cuelist number (optional; requires cue)',
+					default: '',
+					minLength: 0,
+				},
+			],
+			callback: async (event) => {
+				self.sendMsc({
+					command: 'go',
+					cue: String(event.options.cue ?? ''),
+					cuelist: String(event.options.cuelist ?? ''),
+				})
+			},
+		},
+		msc_stop: {
+			name: 'MSC: STOP / Pause',
+			description:
+				'Pause running transitions. Leave cue and cuelist blank for all applicable transitions. A cuelist requires a cue.',
+			options: [
+				{
+					type: 'static-text',
+					id: 'info',
+					label: 'About this command',
+					value:
+						'Pause running transitions. Leave cue and cuelist blank for all applicable transitions. A cuelist requires a cue.',
+				},
+				{ type: 'textinput', id: 'cue', label: 'Cue number (optional)', default: '', minLength: 0 },
+				{
+					type: 'textinput',
+					id: 'cuelist',
+					label: 'Cuelist number (optional; requires cue)',
+					default: '',
+					minLength: 0,
+				},
+			],
+			callback: async (event) => {
+				self.sendMsc({
+					command: 'stop',
+					cue: String(event.options.cue ?? ''),
+					cuelist: String(event.options.cuelist ?? ''),
+				})
+			},
+		},
+		msc_resume: {
+			name: 'MSC: RESUME',
+			description:
+				'Continue transitions paused by STOP. Leave cue and cuelist blank for all applicable transitions. Vista acceptance should be verified for your software version.',
+			options: [
+				{
+					type: 'static-text',
+					id: 'info',
+					label: 'About this command',
+					value:
+						'Continue transitions paused by STOP. Leave cue and cuelist blank for all applicable transitions. Vista acceptance should be verified for your software version.',
+				},
+				{ type: 'textinput', id: 'cue', label: 'Cue number (optional)', default: '', minLength: 0 },
+				{
+					type: 'textinput',
+					id: 'cuelist',
+					label: 'Cuelist number (optional; requires cue)',
+					default: '',
+					minLength: 0,
+				},
+			],
+			callback: async (event) => {
+				self.sendMsc({
+					command: 'resume',
+					cue: String(event.options.cue ?? ''),
+					cuelist: String(event.options.cuelist ?? ''),
+				})
+			},
+		},
+		msc: {
+			name: 'MSC: Legacy combined command',
+			description: 'Sends MIDI SysEx. Blank cue/list addresses open cuelists. A cuelist requires a cue.',
+			options: [
+				{
+					type: 'dropdown',
+					id: 'command',
+					label: 'Command',
+					default: 'go',
+					choices: [
+						{ id: 'go', label: 'GO' },
+						{ id: 'stop', label: 'STOP (pause)' },
+						{ id: 'resume', label: 'RESUME' },
+					],
+				},
+				{ type: 'textinput', id: 'cue', label: 'Cue number (blank for next/current transitions)', default: '' },
+				{ type: 'textinput', id: 'cuelist', label: 'Cuelist number (optional; requires cue)', default: '' },
+			],
+			callback: async (event) => {
+				self.sendMsc(event.options)
+			},
+		},
 		custom_message: {
 			name: 'Custom: Send message without arguments',
 			options: [
